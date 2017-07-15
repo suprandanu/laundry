@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">laundry</string>
+    <string name="tab_1">Label 1</string>
+    <string name="tab_2">Label 2</string>
+    <string name="tab_3">Label 3</string>
+    <string name="tab_4">Label 4</string>
+    <string name="tab_5">Label 5</string>
+
+    <string name="menu_1">Beranda</string>
+    <string name="menu_2">Transaksi</string>
+    <string name="menu_3">Akun Saya</string>
+    <string name="menu_4">Menu 4</string>
+    <string name="menu_5">Menu 5</string>
+    <string name="title_activity_coba_bottom">cobaBottom</string>
+    <string name="title_home"></string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="prompt_jasa">Pilih Jenis Jasa</string>
+    <string-array name="entries_jasa">
+        <item>Cuci</item>
+        <item>Setrika</item>
+        <item>Cuci + Setrika</item>
+    </string-array>
+    <string name="title_activity_pilih_lokasii">Map</string>
+    <string name="google_maps_key">AIzaSyBLkSq0TRuYp0hq7caeMsPj04zgZGK9vlI</string>
+
+</resources>
