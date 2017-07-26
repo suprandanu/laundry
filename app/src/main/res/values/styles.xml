@@ -17,6 +17,14 @@
         <item name="windowActionBar">false</item>
     </style>
 
+    <style name="SplashNoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#f967ba</item>
+        <item name="colorPrimaryDark">#f967ba</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
     <style name="setting">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

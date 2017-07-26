@@ -1,6 +1,7 @@
 package com.alfian.android.laundry;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -33,6 +34,7 @@ public class Login extends AppCompatActivity {
     TextView hub;
     EditText username, password;
     Button bmasuk;
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,8 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 if (username.getText().length() > 0){
                     if (password.getText().length() > 0){
+                        pd = ProgressDialog.show(Login.this, "Proses Login", "Tunggu", true);
+
                         wsc = new WebServiceConnect();
                         Map<String, String> param = new Hashtable<String, String>();
                         param.put("username", username.getText().toString());
@@ -103,6 +107,13 @@ public class Login extends AppCompatActivity {
                             public void onError(String message) {
                                 Toast.makeText(getApplicationContext(), "Tidak bisa terkoneksi dengan server", Toast.LENGTH_SHORT).show();
                                 Log.d("WSC", "onError: ");
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run()
+                                    {
+                                        pd.dismiss();
+                                    }
+                                });
                             }
 
                             @Override
@@ -114,12 +125,26 @@ public class Login extends AppCompatActivity {
                                     Toast.makeText(Login.this, "Berhasil login"+" "+rd.getData().get(0).getNama_plg(), Toast.LENGTH_SHORT).show();
                                     Log.d("WSC", "onResponse: jos");
                                     sm.saveLogin(new String[]{"loged", rd.getData().get(0).getUser_plg()});
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run()
+                                        {
+                                            pd.dismiss();
+                                        }
+                                    });
                                     startActivity(new Intent(Login.this, Beranda.class));
                                     Login.this.finish();
                                 }else {
                                     Log.d("WSC", "onResponse: gagal");
                                     ResponseDataUser rd = new Gson().fromJson(response, ResponseDataUser.class);
                                     Toast.makeText(Login.this, "Username/Password salah", Toast.LENGTH_SHORT).show();
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run()
+                                        {
+                                            pd.dismiss();
+                                        }
+                                    });
                                 }
                             }
                         });

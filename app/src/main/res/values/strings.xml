@@ -24,5 +24,6 @@
     </string-array>
     <string name="title_activity_pilih_lokasii">Map</string>
     <string name="google_maps_key">AIzaSyBLkSq0TRuYp0hq7caeMsPj04zgZGK9vlI</string>
+    <string name="title_activity_alamat">Map</string>
 
 </resources>

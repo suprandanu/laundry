@@ -90,7 +90,7 @@ public class SessionManager {
 
     public void clearAlamat(){
         SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("jarak", "kosong");
+        editor.putString("alamat", "kosong");
         editor.commit();
     }
 

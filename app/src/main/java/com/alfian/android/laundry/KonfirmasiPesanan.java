@@ -1,5 +1,6 @@
 package com.alfian.android.laundry;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class KonfirmasiPesanan extends AppCompatActivity {
 
     EditText ket_lokasi;
     TextView ubah, alamat, jarak, ongkir, kirim, log;
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,6 @@ public class KonfirmasiPesanan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(KonfirmasiPesanan.this, AlamatPengantaran.class));
-                sm.clearAlamat();
                 sm.clearLatitute();
                 sm.clearLongitute();
                 sm.clearOngkir();
@@ -71,6 +72,7 @@ public class KonfirmasiPesanan extends AppCompatActivity {
             public void onClick(View v) {
                 if (alamat.getText().length() > 0) {
                     if (ket_lokasi.getText().length() > 0) {
+                        pd = ProgressDialog.show(KonfirmasiPesanan.this, "Pengiriman Pesanan", "Tunggu", true);
 
                         boolean simpan = db.konfirmasi_pesanan(sm.getId(), sm.getLongitute(),
                                 sm.getLatitute(), sm.getAlamat(), ket_lokasi.getText().toString(),
@@ -100,6 +102,13 @@ public class KonfirmasiPesanan extends AppCompatActivity {
                                 public void onError(String message) {
                                     Toast.makeText(getApplicationContext(), "Tidak bisa terkoneksi dengan server", Toast.LENGTH_SHORT).show();
                                     Log.d("WSC", "onError: ");
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run()
+                                        {
+                                            pd.dismiss();
+                                        }
+                                    });
                                 }
 
                                 @Override
@@ -112,6 +121,13 @@ public class KonfirmasiPesanan extends AppCompatActivity {
                                     } else {
                                         //cek("pengiriman gagal");
                                         Toast.makeText(KonfirmasiPesanan.this, "Pengiriman Pesanan Gagal", Toast.LENGTH_SHORT).show();
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run()
+                                            {
+                                                pd.dismiss();
+                                            }
+                                        });
                                     }
 
                                     mBarang = db.getAllDataBarang(KonfirmasiPesanan.this, sm.getId());
@@ -137,6 +153,13 @@ public class KonfirmasiPesanan extends AppCompatActivity {
                                             public void onError(String message) {
                                                 Toast.makeText(getApplicationContext(), "Tidak bisa terkoneksi dengan server", Toast.LENGTH_SHORT).show();
                                                 Log.d("WSC", "onError: ");
+                                                runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run()
+                                                    {
+                                                        pd.dismiss();
+                                                    }
+                                                });
                                             }
 
                                             @Override
@@ -148,6 +171,13 @@ public class KonfirmasiPesanan extends AppCompatActivity {
                                                     //Toast.makeText(KonfirmasiPesanan.this, "Pengiriman Barang Sukses"+String.valueOf(finalI), Toast.LENGTH_SHORT).show();
                                                 } else {
                                                     Toast.makeText(KonfirmasiPesanan.this, "Pengiriman Barang Gagal"+String.valueOf(finalI), Toast.LENGTH_SHORT).show();
+                                                    runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run()
+                                                        {
+                                                            pd.dismiss();
+                                                        }
+                                                    });
                                                 }
                                             }
                                         });
@@ -169,7 +199,6 @@ public class KonfirmasiPesanan extends AppCompatActivity {
 
                                     sm.clearId();
                                     sm.clearFilter();
-                                    sm.clearAlamat();
                                     sm.clearJarak();
                                     sm.clearOngkir();
                                     sm.clearLongitute();
@@ -182,6 +211,13 @@ public class KonfirmasiPesanan extends AppCompatActivity {
                             });
                         } else {
                             Toast.makeText(KonfirmasiPesanan.this, "Data Tidak Tersimpan", Toast.LENGTH_LONG).show();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run()
+                                {
+                                    pd.dismiss();
+                                }
+                            });
                         }
                     }else {
                         Toast.makeText(KonfirmasiPesanan.this, "Keterangan Lokasi Masih Kosong", Toast.LENGTH_SHORT).show();

@@ -3,10 +3,7 @@ package com.alfian.android.laundry;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -46,34 +43,23 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
-public class AlamatPengantaran extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class Alamat extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private GoogleMap mMap;
     ArrayList<LatLng> MarkerPoints;
     ArrayList<Marker> arrayMarker;
-    Marker mMarker;
-    Marker mCurrLocationMarker;
     GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
     LocationRequest mLocationRequest;
-    private double latD, lngD;
     private String distance, duration;
     double longitude, latitude;
-    protected LocationManager locationManager;
     SessionManager sm;
-
     TextView t;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alamat_pengantaran);
-
-        latD = getIntent().getDoubleExtra("lat", 0);
-        lngD = getIntent().getDoubleExtra("lng", 0);
+        setContentView(R.layout.activity_alamat);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -89,8 +75,6 @@ public class AlamatPengantaran extends FragmentActivity implements OnMapReadyCal
 
         sm = new SessionManager(this);
         t = (TextView) findViewById(R.id.alamat_antar);
-
-
     }
 
 
@@ -219,53 +203,6 @@ public class AlamatPengantaran extends FragmentActivity implements OnMapReadyCal
 
     @Override
     public void onLocationChanged(Location location) {
-        /*mLastLocation = location;
-        if (mCurrLocationMarker != null) {
-            mCurrLocationMarker.remove();
-        }
-
-
-        //stop location updates
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }*/
-        //String fullAdd;
-
-        try {
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-            Geocoder geocoder = new Geocoder(AlamatPengantaran.this.getApplication(), Locale.getDefault());
-            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            //Log.d("TEE", "onLocationChanged: " + geocoder.getFromLocation(latitude, longitude, 1));
-
-            if (addresses.isEmpty()) {
-                t.setText("Waiting for Location");
-            }
-            else {
-                if (addresses.size() > 0) {
-                    t.setText(addresses.get(0).getFeatureName() + ", " + addresses.get(0).getLocality() +", " + addresses.get(0).getAdminArea() + ", " + addresses.get(0).getCountryName());
-                    //Toast.makeText(getApplicationContext(), "Address:- " + addresses.get(0).getFeatureName() + addresses.get(0).getAdminArea() + addresses.get(0).getLocality(), Toast.LENGTH_LONG).show();
-                }
-            }
-
-            String address = addresses.get(0).getAddressLine(0);
-            t.setText(address);
-            Toast.makeText(AlamatPengantaran.this, "Test", Toast.LENGTH_SHORT).show();
-
-
-            String city = addresses.get(0).getLocality();
-            String state = addresses.get(0).getAdminArea();
-            String country = addresses.get(0).getCountryName();
-            String postalCode = addresses.get(0).getPostalCode();
-
-            //t.setText(address+", "+city+", "+state+" "+postalCode+", "+country);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         addLine(location);
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -276,8 +213,8 @@ public class AlamatPengantaran extends FragmentActivity implements OnMapReadyCal
                 .build();
 
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-    }
 
+    }
 
     // Fetches data from url passed
     private class FetchUrl extends AsyncTask<String, Void, String> {
@@ -302,7 +239,7 @@ public class AlamatPengantaran extends FragmentActivity implements OnMapReadyCal
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            ParserTask parserTask = new ParserTask();
+            Alamat.ParserTask parserTask = new Alamat.ParserTask();
 
             // Invokes the thread for parsing the JSON data
             parserTask.execute(result);
@@ -324,7 +261,7 @@ public class AlamatPengantaran extends FragmentActivity implements OnMapReadyCal
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Intent intent = new Intent(AlamatPengantaran.this, KonfirmasiPesanan.class);
+                Intent intent = new Intent(Alamat.this, KonfirmasiPesanan.class);
                 startActivity(intent);
 
                 String CurrentString = distance;
@@ -357,12 +294,11 @@ public class AlamatPengantaran extends FragmentActivity implements OnMapReadyCal
         Marker dest = arrayMarker.get(0);
         String url = getUrl(origin, dest);
         Log.d("onMapClick", url.toString());
-        FetchUrl FetchUrl = new FetchUrl();
+        Alamat.FetchUrl FetchUrl = new Alamat.FetchUrl();
         FetchUrl.execute(url);
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
         //mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
     }
-
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 

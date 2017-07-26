@@ -24,17 +24,18 @@
         android:label="Lany Laundry"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splash" />
         <activity
-            android:name=".Login"
-            android:theme="@style/AppThemeNoActionBar">
+            android:name=".Splash"
+            android:theme="@style/SplashNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity
+            android:name=".Login"
+            android:theme="@style/AppThemeNoActionBar"></activity>
         <activity
             android:name=".Daftar"
             android:theme="@style/AppThemeNoActionBar" />
@@ -42,7 +43,7 @@
         <activity
             android:name=".TambahBarang"
             android:label="List Barang"
-            android:parentActivityName=".Beranda"/>
+            android:parentActivityName=".Beranda" />
         <activity
             android:name=".EditProfil"
             android:label="Ubah Profil" />
@@ -52,16 +53,16 @@
         <activity
             android:name=".KonfirmasiPesanan"
             android:label="Konfirmasi Pesanan"
-            android:parentActivityName=".TambahBarang"/>
+            android:parentActivityName=".TambahBarang" />
         <activity
             android:name=".InformasiCuci"
-            android:parentActivityName=".Beranda"/>
+            android:parentActivityName=".Beranda" />
         <activity
             android:name=".InformasiSetrika"
-            android:parentActivityName=".Beranda"/>
+            android:parentActivityName=".Beranda" />
         <activity
             android:name=".InformasiCuciSetrika"
-            android:parentActivityName=".Beranda"/>
+            android:parentActivityName=".Beranda" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -69,8 +70,10 @@
 
         <activity
             android:name=".AlamatPengantaran"
-            android:label="@string/title_activity_pilih_lokasii">
-        </activity>
+            android:label="@string/title_activity_pilih_lokasii" />
+        <activity
+            android:name=".Alamat"
+            android:label="@string/title_activity_alamat"></activity>
     </application>
 
 </manifest>

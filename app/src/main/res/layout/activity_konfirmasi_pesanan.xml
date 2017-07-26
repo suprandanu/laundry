@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.alfian.android.laundry.KonfirmasiPesanan">
 
-
-
-
         <android.support.v7.widget.CardView
             android:id="@+id/atas"
             android:layout_width="match_parent"
@@ -18,6 +15,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -47,15 +45,17 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
                     android:background="#a7a5a5" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -71,8 +71,9 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical">
 
                         <TextView
                             android:id="@+id/alamat"
@@ -95,16 +96,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="10dp"
+                    android:padding="10dp"
                     android:text="KETERANGAN ALAMAT"
                     android:textSize="14dp"
                     android:textStyle="bold" />
@@ -117,8 +116,9 @@
                     android:id="@+id/ket_lokasi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="10dp"
                     android:hint="silahkan isi"
                     android:textColor="@color/colorPrimary"
                     android:textSize="13dp" />
@@ -135,6 +135,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -148,15 +149,18 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
                     android:background="#a7a5a5" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -194,9 +198,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -221,49 +226,6 @@
                         android:textSize="13dp"
                         android:textStyle="italic|bold" />
                 </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/pemabayaran"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/bawah"
-            android:layout_margin="5dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="PILIH PEMBAYARAN"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#a7a5a5" />
-
-                    <RadioButton
-                        android:id="@+id/radio_saldo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginTop="5dp"
-                        android:text="Saldo"/>
-
-                    <RadioButton
-                        android:id="@+id/radio_tunai"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginTop="5dp"
-                        android:text="Bayar Tunai"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 

@@ -1,5 +1,6 @@
 package com.alfian.android.laundry;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ public class Daftar extends AppCompatActivity {
     WebServiceConnect wsc;
     EditText username, nama, hp, password;
     Button bdaftar;
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class Daftar extends AppCompatActivity {
                     if (nama.getText().length() > 0) {
                         if (hp.getText().length() > 0) {
                             if (password.getText().length() > 0) {
+                                pd = ProgressDialog.show(Daftar.this, "Proses Pendaftaran", "Tunggu", true);
+
                                 wsc = new WebServiceConnect();
                                 final Map<String, String> param = new Hashtable<String, String>();
                                 param.put("username", username.getText().toString());
@@ -50,6 +54,13 @@ public class Daftar extends AppCompatActivity {
                                     public void onError(String message) {
                                         Toast.makeText(getApplicationContext(), "Tidak bisa terkoneksi dengan server", Toast.LENGTH_SHORT).show();
                                         Log.d("WSC", "onError: ");
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run()
+                                            {
+                                                pd.dismiss();
+                                            }
+                                        });
                                     }
 
                                     @Override
@@ -58,10 +69,24 @@ public class Daftar extends AppCompatActivity {
                                         Responses r = new Gson().fromJson(response, Responses.class);
                                         if (r.getStatus().equals("success")){
                                             Toast.makeText(Daftar.this, "Pendaftaran Sukses", Toast.LENGTH_SHORT).show();
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run()
+                                                {
+                                                    pd.dismiss();
+                                                }
+                                            });
                                             startActivity(new Intent(Daftar.this, Login.class));
                                             Daftar.this.finish();
                                         }else {
                                             Toast.makeText(Daftar.this, "Pendaftaraan Gagal", Toast.LENGTH_SHORT).show();
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run()
+                                                {
+                                                    pd.dismiss();
+                                                }
+                                            });
                                         }
                                     }
                                 });
