@@ -54,7 +54,7 @@ public class EditProfil extends AppCompatActivity {
                     ResponseDataUser rd = new Gson().fromJson(response, ResponseDataUser.class);
                     nama.setText(rd.getData().get(0).getNama_plg());
                     hp.setText(rd.getData().get(0).getHp());
-                    alamat.setText(rd.getData().get(0).getAlamat());
+                    //alamat.setText(rd.getData().get(0).getAlamat());
                 }else {
                     Log.d("WSC", "onResponse: gagal");
                     ResponseDataUser rd = new Gson().fromJson(response, ResponseDataUser.class);
@@ -106,7 +106,7 @@ public class EditProfil extends AppCompatActivity {
         if (id == R.id.menu_ubah){
             nama.setEnabled(true);
             hp.setEnabled(true);
-            alamat.setEnabled(true);
+            //alamat.setEnabled(true);
             simpan.setVisibility(View.VISIBLE);
 
         }

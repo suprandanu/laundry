@@ -219,52 +219,41 @@ public class AlamatPengantaran extends FragmentActivity implements OnMapReadyCal
 
     @Override
     public void onLocationChanged(Location location) {
-        /*mLastLocation = location;
-        if (mCurrLocationMarker != null) {
-            mCurrLocationMarker.remove();
-        }
-
-
-        //stop location updates
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }*/
-        //String fullAdd;
-
         try {
             latitude = location.getLatitude();
             longitude = location.getLongitude();
             Geocoder geocoder = new Geocoder(AlamatPengantaran.this.getApplication(), Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            //Log.d("TEE", "onLocationChanged: " + geocoder.getFromLocation(latitude, longitude, 1));
 
             if (addresses.isEmpty()) {
                 t.setText("Waiting for Location");
             }
             else {
                 if (addresses.size() > 0) {
-                    t.setText(addresses.get(0).getFeatureName() + ", " + addresses.get(0).getLocality() +", " + addresses.get(0).getAdminArea() + ", " + addresses.get(0).getCountryName());
-                    //Toast.makeText(getApplicationContext(), "Address:- " + addresses.get(0).getFeatureName() + addresses.get(0).getAdminArea() + addresses.get(0).getLocality(), Toast.LENGTH_LONG).show();
+                    t.setText(addresses.get(0).getAddressLine(0));
+                    //t.setText(addresses.get(0).getAddressLine(0) +addresses.get(0).getFeatureName() + ", " + addresses.get(0).getLocality() +", " + addresses.get(0).getAdminArea() + ", " + addresses.get(0).getCountryName());
                 }
             }
 
-            String address = addresses.get(0).getAddressLine(0);
-            t.setText(address);
-            Toast.makeText(AlamatPengantaran.this, "Test", Toast.LENGTH_SHORT).show();
+            //String address = addresses.get(0).getAddressLine(0);
+            //t.setText(address);
+            //Toast.makeText(AlamatPengantaran.this, "Test", Toast.LENGTH_SHORT).show();
 
 
-            String city = addresses.get(0).getLocality();
-            String state = addresses.get(0).getAdminArea();
-            String country = addresses.get(0).getCountryName();
-            String postalCode = addresses.get(0).getPostalCode();
-
+            //String city = addresses.get(0).getLocality();
+            //String state = addresses.get(0).getAdminArea();
+            //String country = addresses.get(0).getCountryName();
+            //String postalCode = addresses.get(0).getPostalCode();
             //t.setText(address+", "+city+", "+state+" "+postalCode+", "+country);
 
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+            Log.d("Fian", "onLocationChanged: "+ e.getMessage());
         }
+
+        sm.saveAlamat(t.getText().toString());
 
         addLine(location);
 
@@ -326,6 +315,7 @@ public class AlamatPengantaran extends FragmentActivity implements OnMapReadyCal
             public void onInfoWindowClick(Marker marker) {
                 Intent intent = new Intent(AlamatPengantaran.this, KonfirmasiPesanan.class);
                 startActivity(intent);
+                AlamatPengantaran.this.finish();
 
                 String CurrentString = distance;
                 String[] separated = CurrentString.split("\\s");

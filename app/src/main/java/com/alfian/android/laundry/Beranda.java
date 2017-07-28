@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -13,7 +11,6 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
-import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 
 import java.util.ArrayList;
 
@@ -105,7 +102,7 @@ public class Beranda extends AppCompatActivity {
 
         currentFragment = adapter.getCurrentFragment();
 
-        handler.postDelayed(new Runnable() {
+        /*handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 // Setting custom colors for notification
@@ -119,7 +116,7 @@ public class Beranda extends AppCompatActivity {
                         Snackbar.LENGTH_SHORT).show();
 
             }
-        }, 3000);
+        }, 3000);*/
     }
 
     /**

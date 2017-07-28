@@ -50,7 +50,6 @@ public class KonfirmasiPesanan extends AppCompatActivity {
         jarak       = (TextView) findViewById(R.id.jarak);
         ongkir      = (TextView) findViewById(R.id.ongkir);
         kirim       = (TextView) findViewById(R.id.kirim);
-        //log         = (TextView) findViewById(R.id.log);
 
         ubah.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +164,6 @@ public class KonfirmasiPesanan extends AppCompatActivity {
                                             @Override
                                             public void onResponse(String response) {
                                                 Log.d("WSC", "onResponse: " + response);
-                                                //cek("alamat = "+Constants.BASE_API_USER + "&state=barang"+" respon"+response);
                                                 Responses r = new Gson().fromJson(response, Responses.class);
                                                 if (r.getStatus().equals("success")) {
                                                     //Toast.makeText(KonfirmasiPesanan.this, "Pengiriman Barang Sukses"+String.valueOf(finalI), Toast.LENGTH_SHORT).show();
@@ -182,7 +180,14 @@ public class KonfirmasiPesanan extends AppCompatActivity {
                                             }
                                         });
 
-                                        if (i == mBarang.size() - 1){
+                                        if (i == mBarang.size() - 0){
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run()
+                                                {
+                                                    pd.dismiss();
+                                                }
+                                            });
                                             Log.d("CANTIK", "onResponse: "+ i);
                                             Log.d("CANTIK", "onResponse: "+ mBarang.size());
                                             AlertDialog.Builder builder = new AlertDialog.Builder(KonfirmasiPesanan.this);
@@ -203,10 +208,8 @@ public class KonfirmasiPesanan extends AppCompatActivity {
                                     sm.clearOngkir();
                                     sm.clearLongitute();
                                     sm.clearLatitute();
-
-
-
-                                    //startActivity(new Intent(KonfirmasiPesanan.this, FragmentTabSekarang.class));
+                                    sm.clearAlamat();
+                                    KonfirmasiPesanan.this.finish();
                                 }
                             });
                         } else {

@@ -34,7 +34,7 @@ import java.util.Map;
 public class FragmentAkun extends Fragment {
     SessionManager sm;
     WebServiceConnect wsc;
-    TextView nama;
+    TextView nama, saldo;
     SwipeRefreshLayout swipeRefreshLayout;
 
     private FrameLayout fragmentContainer;
@@ -74,6 +74,7 @@ public class FragmentAkun extends Fragment {
                 if (r.getStatus().equals("success")){
                     ResponseDataUser rd = new Gson().fromJson(response, ResponseDataUser.class);
                     nama.setText(rd.getData().get(0).getNama_plg());
+                    saldo.setText("Saldo Anda Rp " + rd.getData().get(0).getSaldo());
                 }
             }
         });
@@ -112,6 +113,7 @@ public class FragmentAkun extends Fragment {
         swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_refresh);
 
         nama = (TextView) view.findViewById(R.id.nama);
+        saldo = (TextView) view.findViewById(R.id.saldo);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
